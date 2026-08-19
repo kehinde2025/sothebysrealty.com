@@ -230,7 +230,7 @@ export default function RentalApplication() {
   };
 
   return (
-    <section className="rental-application">
+    <section id="rental-application" className="rental-application">
 
       {/* HEADER */}
 

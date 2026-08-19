@@ -9,11 +9,41 @@ export default function Hero() {
                 </h1>
 
                 <nav className="hero-nav">
-                    <button type="button">Buy</button>
-                    <button type="button">Rent</button>
-                    <button type="button">Developments</button>
-                    <button type="button">Sell</button>
-                    <button type="button">More</button>
+                    <button type="button"
+                        onClick={() =>
+                            document.getElementById("rental-application")?.scrollIntoView({
+                                behavior: "smooth",
+                                block: "start",
+                            })
+                        }>Buy</button>
+                    <button type="button"
+                        onClick={() =>
+                            document.getElementById("rental-application")?.scrollIntoView({
+                                behavior: "smooth",
+                                block: "start",
+                            })
+                        }>Rent</button>
+                    <button type="button"
+                        onClick={() =>
+                            document.getElementById("rental-application")?.scrollIntoView({
+                                behavior: "smooth",
+                                block: "start",
+                            })
+                        }>Developments</button>
+                    <button type="button"
+                        onClick={() =>
+                            document.getElementById("rental-application")?.scrollIntoView({
+                                behavior: "smooth",
+                                block: "start",
+                            })
+                        }>Sell</button>
+                    <button type="button"
+                        onClick={() =>
+                            document.getElementById("rental-application")?.scrollIntoView({
+                                behavior: "smooth",
+                                block: "start",
+                            })
+                        }>More</button>
                 </nav>
 
                 <div className="search-panel">
