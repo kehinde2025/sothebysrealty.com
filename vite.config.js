@@ -74,6 +74,18 @@ RENTAL DETAILS
 Preferred Move-in Date: ${formData.moveInDate}
 Lease Duration: ${formData.leaseDuration}
 
+
+Preferred Location / ZIP Code:
+${formData.preferredLocation || "N/A"}
+
+Budget:
+${formData.budget || "N/A"}
+
+Schedule a Viewing:
+${formData.scheduleViewing || "N/A"}
+                    
+
+
 ━━━━━━━━━━━━━━━━━━
 
 ADDITIONAL INFORMATION
@@ -90,9 +102,8 @@ Payment Method: ${formData.payment}
 
 ━━━━━━━━━━━━━━━━━━
 
-APPLICATION CONFIRMED: ${
-                      formData.confirmed ? "YES" : "NO"
-                    }
+APPLICATION CONFIRMED: ${formData.confirmed ? "YES" : "NO"
+                      }
 
 ━━━━━━━━━━━━━━━━━━
 `;
