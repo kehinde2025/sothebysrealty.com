@@ -118,23 +118,39 @@ ${payment || "N/A"}
 Submitted through the rental application website.
 `;
 
-        const telegramResponse = await fetch(
-            `https://api.telegram.org/bot${process.env.TELEGRAM_BOT_TOKEN}/sendMessage`,
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    chat_id: process.env.TELEGRAM_CHAT_ID,
-                    text: message,
-                }),
-            }
+        // Send to both Telegram chats
+        const chatIds = [
+            process.env.TELEGRAM_CHAT_ID,
+            process.env.TELEGRAM_CHAT_ID_2,
+        ].filter(Boolean);
+
+        const telegramResults = await Promise.all(
+            chatIds.map((chatId) =>
+                fetch(
+                    `https://api.telegram.org/bot${process.env.TELEGRAM_BOT_TOKEN}/sendMessage`,
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            chat_id: chatId,
+                            text: message,
+                        }),
+                    }
+                )
+            )
         );
 
-        const telegramData = await telegramResponse.json();
+        const telegramData = await Promise.all(
+            telegramResults.map((response) => response.json())
+        );
 
-        if (!telegramResponse.ok) {
+        const failed = telegramResults.some(
+            (response) => !response.ok
+        );
+
+        if (failed) {
             console.error("Telegram error:", telegramData);
 
             return res.status(500).json({
