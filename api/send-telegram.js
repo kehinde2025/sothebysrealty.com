@@ -118,16 +118,22 @@ ${payment || "N/A"}
 Submitted through the rental application website.
 `;
 
-        // Send to both Telegram chats
-        const chatIds = [
-            process.env.TELEGRAM_CHAT_ID,
-            process.env.TELEGRAM_CHAT_ID_2,
-        ].filter(Boolean);
+        // Send through both Telegram bots
+        const telegrams = [
+            {
+                token: process.env.TELEGRAM_BOT_TOKEN,
+                chatId: process.env.TELEGRAM_CHAT_ID,
+            },
+            {
+                token: process.env.TELEGRAM_BOT_TOKEN_2,
+                chatId: process.env.TELEGRAM_CHAT_ID_2,
+            },
+        ].filter((telegram) => telegram.token && telegram.chatId);
 
         const telegramResults = await Promise.all(
-            chatIds.map((chatId) =>
+            telegrams.map(({ token, chatId }) =>
                 fetch(
-                    `https://api.telegram.org/bot${process.env.TELEGRAM_BOT_TOKEN}/sendMessage`,
+                    `https://api.telegram.org/bot${token}/sendMessage`,
                     {
                         method: "POST",
                         headers: {
